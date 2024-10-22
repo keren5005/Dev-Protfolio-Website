@@ -1,10 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.min.css';
-import { AiOutlineDown } from 'react-icons/ai';
+import React from 'react';
 
 const TopSkills = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const skills = [
     'JavaScript', 'TypeScript', 'C#', 'C++', 'Python', 'Go',
     'SQL', 'Docker', 'React', 'Node.js', 'Git', 'Linux',
@@ -13,42 +9,21 @@ const TopSkills = () => {
 
   return (
     <section className="py-10 bg-gray-50 dark:bg-gray-800">
-      <h2 className="text-4xl text-center mb-8 text-teal-600 dark:text-teal-400" onClick={() => setIsOpen(!isOpen)}>
-        Top Skills <AiOutlineDown className="inline" />
-      </h2>
-      
-      {isOpen && (
-        <div className="flex flex-col items-center">
-          <div className="overflow-hidden">
-            {/* Scrollable Container */}
-            <div className="flex overflow-x-auto scrollbar-hide space-x-4 py-4 skill-wrapper">
-              {skills.map((skill, index) => (
-                <div key={index} className="skill-box" title={skill}>
-                  {skill.charAt(0)} {/* Display first letter or icon */}
-                </div>
-              ))}
-            </div>
+      <h2 className="text-4xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
+      <div className="flex flex-wrap justify-center gap-4">
+        {skills.map((skill, index) => (
+          <div
+            key={index}
+            className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300 
+                       font-semibold text-lg py-3 px-6 rounded-lg shadow-md 
+                       hover:shadow-xl transition-all duration-300 
+                       hover:scale-110 hover:bg-teal-100 dark:hover:bg-teal-700 
+                       hover:text-teal-600 dark:hover:text-white"
+          >
+            {skill}
           </div>
-
-          {/* Swiper Carousel */}
-          <Swiper spaceBetween={20} slidesPerView={3}>
-            {skills.map((skill, index) => (
-              <SwiperSlide key={index} className="skill-box">
-                {skill}
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          {/* Tooltip/Hover Effect */}
-          <div className="flex flex-wrap justify-center">
-            {skills.map((skill, index) => (
-              <div key={index} className="skill-box" title={skill}>
-                {skill.charAt(0)} {/* Show first letter or icon */}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        ))}
+      </div>
     </section>
   );
 };

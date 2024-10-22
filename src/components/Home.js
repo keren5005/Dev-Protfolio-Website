@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import ParticleBackground from './ParticleBackground';
 import TopProjects from './TopProjects';
 import GitHubVisualization from './GitHubVisualization';
-import { AiFillGithub, AiFillLinkedin, AiOutlineMail, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
 
@@ -30,39 +30,23 @@ export default function Home() {
   };
 
   const skills = [
-    'JavaScript',
-    'TypeScript',
-    'C#',
-    'C++',
-    'Python',
-    'Go',
-    'SQL',
-    'Docker',
-    'React',
-    'Node.js',
-    'Git',
-    'Linux',
-    'CSS',
-    'HTML',
-    'REST APIs',
-    'Unity',
-    'Prometheus',
-    'Wireshark',
+    'JavaScript', 'TypeScript', 'C#', 'C++', 'Python', 'Go',
+    'SQL', 'Docker', 'React', 'Node.js', 'Git', 'Linux',
+    'CSS', 'HTML', 'REST APIs', 'Unity', 'Prometheus', 'Wireshark'
   ];
 
   return (
     <>
-      {/* Parallax Hero Section */}
       <Parallax bgImage="/path-to-background-image.jpg" strength={300}>
         <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
           <ParticleBackground />
           <motion.div
-            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-5"
+            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-4"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md mx-auto mt-10">
+            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md mx-auto">
               <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400">
                 <img
                   src="/avatarPictures/hi.png" 
@@ -80,30 +64,15 @@ export default function Home() {
                 a difference!
               </p>
               <div className="text-3xl flex justify-center gap-4 py-3 text-gray-600 dark:text-gray-400">
-                <div className="flex justify-center items-center gap-2">
-                  <a
-                    href="https://github.com/keren5005"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-500"
-                  >
-                    <AiFillGithub />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-500"
-                  >
-                    <AiFillLinkedin />
-                  </a>
-                  <a
-                    href="mailto:keren5005005@gmail.com"
-                    className="hover:text-teal-500"
-                  >
-                    <AiOutlineMail />
-                  </a>
-                </div>
+                <a href="https://github.com/keren5005" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500">
+                  <AiFillGithub />
+                </a>
+                <a href="https://www.linkedin.com/in/keren-cohen-aa6987215/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500">
+                  <AiFillLinkedin />
+                </a>
+                <a href="mailto:keren5005005@gmail.com" className="hover:text-teal-500">
+                  <AiOutlineMail />
+                </a>
               </div>
               <a
                 href="/Keren Cohen Software Developer CV.pdf"
@@ -117,117 +86,33 @@ export default function Home() {
         </section>
       </Parallax>
 
-      {/* Skills Section */}
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
         <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
         <div className="relative flex justify-center items-center">
-          {/* Left Scroll Button */}
-          <button 
-            className="absolute left-2 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
-            onClick={scrollLeft}
-          >
-            <AiOutlineLeft size={24} />
-          </button>
-
-          <div ref={skillContainerRef} className="flex overflow-x-auto scrollbar-hide space-x-4 skill-wrapper">
+          <div ref={skillContainerRef} className="flex overflow-x-auto space-x-4 scrollbar-hide p-4">
             {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }} // Add hover effect
-                transition={{ type: "spring", stiffness: 300 }}
-                className="skill-box bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 text-center cursor-pointer"
-              >
-                <p className="text-lg font-bold transition-colors duration-300">{skill}</p>
-              </motion.div>
+              <div key={index} className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300 font-semibold text-lg py-3 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:bg-teal-100 dark:hover:bg-teal-700">
+                {skill}
+              </div>
             ))}
           </div>
-
-          {/* Right Scroll Button */}
-          <button 
-            className="absolute right-2 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
-            onClick={scrollRight}
-          >
-            <AiOutlineRight size={24} />
-          </button>
         </div>
       </section>
 
-      {/* GitHub Features Section */}
-      <section className="py-10 bg-gray-50 dark:bg-gray-800">
-        <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">GitHub Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10">
-          <motion.div
-            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
-            whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
-            transition={{ duration: 0.3 }}
-            onClick={() => openModal('GitHub Stats')}
-          >
-            <h3 className="text-2xl font-bold mb-4 text-teal-600">GitHub Stats</h3>
-          </motion.div>
+      {/* Add other sections here... */}
+      <TopProjects />
+      <GitHubVisualization />
 
-          <motion.div
-            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
-            whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
-            transition={{ duration: 0.3 }}
-            onClick={() => openModal('Contribution Graph')}
-          >
-            <h3 className="text-2xl font-bold mb-4 text-teal-600">Contribution Graph</h3>
-          </motion.div>
-
-          <motion.div
-            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
-            whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
-            transition={{ duration: 0.3 }}
-            onClick={() => openModal('Top Languages')}
-          >
-            <h3 className="text-2xl font-bold mb-4 text-teal-600">Top Languages</h3>
-          </motion.div>
-        </div>
-      </section>
-
+      {/* Modal for Displaying GitHub Features */}
       {modalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-xl w-full transition-transform transform scale-110">
             <h2 className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-4">{currentFeature}</h2>
-            {currentFeature === 'GitHub Stats' && (
-              <div className="flex justify-center">
-                <img
-                  src="https://github-readme-stats.vercel.app/api?username=keren5005&show_icons=true&theme=radical"
-                  alt="GitHub Stats"
-                  className="w-full"
-                />
-              </div>
-            )}
-            {currentFeature === 'Contribution Graph' && (
-              <div className="flex justify-center">
-                <img
-                  src="https://ghchart.rshah.org/keren5005"
-                  alt="GitHub Contribution Graph"
-                  className="w-full"
-                />
-              </div>
-            )}
-            {currentFeature === 'Top Languages' && (
-              <div className="flex justify-center">
-                <img
-                  src="https://github-readme-stats.vercel.app/api/top-langs/?username=keren5005&layout=compact&theme=radical"
-                  alt="Top Languages"
-                  className="w-full"
-                />
-              </div>
-            )}
-            <button
-              onClick={closeModal}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Close
-            </button>
+            {/* Modal content based on currentFeature */}
+            <button onClick={closeModal} className="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
           </div>
         </div>
       )}
-
-      <TopProjects />
-      <GitHubVisualization />
     </>
   );
 }
