@@ -23,133 +23,7 @@ body {
   --button-color: var(--primary-color);
   --button-hover-color: #00695c;
   --card-shadow-color: rgba(0, 0, 0, 0.1);
-}
-
-/* Dark Mode Variables */
-.dark-mode {
-  --background-color: #1c1c1e;
-  --text-color: #f4f4f5;
-  --header-color: #00bfa5;
-  --button-color: var(--secondary-color);
-  --button-hover-color: #00897b;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  color: var(--header-color);
-}
-
-p {
-  margin-bottom: 1rem;
-  color: var(--text-color);
-}
-
-/* Button Styling */
-button, .btn {
-  background-color: var(--button-color);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover, .btn:hover {
-  background-color: var(--button-hover-color);
-}
-
-/* Layout and Spacing */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Flexbox utilities */
-.flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.text-center {
-  text-align: center;
-}
-
-/* Navbar styling */
-.navbar {
-  background-color: var(--primary-color);
-  padding: 20px;
-}
-
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.navbar ul li {
-  color: white;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-}
-
-.navbar a:hover {
-  text-decoration: underline;
-}
-
-/* Footer styling */
-.footer {
-  background-color: var(--primary-color);
-  padding: 20px;
-  color: white;
-  text-align: center;
-}
-
-/* Safe zone for preventing particles overlap */
-.safe-zone {
-  position: relative;
-  z-index: 10;
-  background-color: transparent; /* Ensure background is transparent */
-  padding: 2rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Ensuring particles avoid this central area */
-.center-content {
-  max-width: 800px; /* Limit the width of content for better layout */
-  text-align: center;
-  margin: 0 auto;
-  z-index: 10; /* Ensure it's above particles */
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Scrollbar customization */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  --skill-hover-color: #00bfa5; /* New hover color */
 }
 
 /* Skill box styling */
@@ -157,44 +31,20 @@ html {
   background-color: var(--background-color);
   border: 1px solid #ddd;
   padding: 12px 20px;
-  border-radius: 8px;
+  border-radius: 12px; /* Increased rounded corners */
   margin: 0 10px;
   font-weight: 600;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  background-image: linear-gradient(135deg, #f8f8f8 0%, #fff 100%); /* Add gradient background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Initial shadow */
 }
 
 /* Skill box hover effect */
 .skill-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 10px var(--card-shadow-color);
-}
-
-/* Icon Button Styling */
-.icon-btn {
-  background-color: var(--button-color);
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.icon-btn:hover {
-  background-color: var(--button-hover-color);
-  box-shadow: 0 5px 10px var(--card-shadow-color);
-}
-
-/* Centering content inside container */
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Margin for separating content */
-.mt-4 {
-  margin-top: 1rem;
+  transform: scale(1.1); /* Enlarges slightly on hover */
+  background-color: var(--skill-hover-color); /* Change background color on hover */
+  box-shadow: 0 10px 20px rgba(0, 128, 123, 0.3); /* Glow effect on hover */
+  color: #fff; /* Change text color to white on hover */
 }
 
 /* Skill Section Wrapping */
@@ -210,49 +60,20 @@ html {
 .skill-wrapper::-webkit-scrollbar {
   display: none; /* Hides scrollbar */
 }
-/* Top Skills Section */
-.skill-box {
-  padding: 10px 20px;
-  transition: all 0.3s ease;
-}
-
-/* Smooth scroll for skill section */
-.skill-wrapper {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none; /* For Firefox */
-}
-
-/* For all WebKit browsers like Chrome and Safari */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Progress bar for scrolling skills */
-.progress-bar {
-  width: 100%;
-  height: 4px;
-  background-color: #e0e0e0;
-  position: relative;
-  margin-top: 10px;
-}
-
-.progress {
-  height: 100%;
-  background-color: var(--primary-color);
-  transition: width 0.3s ease;
-}
 
 h2 {
   font-size: 3rem;
   letter-spacing: 1.5px;
   color: var(--header-color);
+  margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 button, .btn {
   padding: 15px 25px;
   font-size: 1.2rem;
   border-radius: 50px;
+  transition: background-color 0.3s ease; /* Ensures buttons also have smooth transitions */
 }
 
 /* Glow effect for skill boxes on hover */
@@ -264,50 +85,50 @@ button, .btn {
   box-shadow: 0px 4px 15px rgba(0, 128, 123, 0.4);
 }
 
-/* Responsive grid for the skills section */
-.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
+section {
+  padding: 4rem;
+  background-color: #f7f7f7;
 }
 
-.sm\:grid-cols-3 {
-  grid-template-columns: repeat(3, 1fr);
+h2 {
+  color: #00897b;
+  font-size: 2.5rem;
+  text-align: center;
 }
 
-.md\:grid-cols-4 {
-  grid-template-columns: repeat(4, 1fr);
+p {
+  color: #555;
+  font-size: 1.25rem;
+  text-align: center;
 }
 
-.lg\:grid-cols-5 {
-  grid-template-columns: repeat(5, 1fr);
-}
-
-/* App.css */
-
-/* Add custom styles for InfoBox */
-.fixed {
-  position: fixed;
-}
-
-.info-box {
-  background-color: #38b2ac; /* Teal */
+button {
+  background-color: #00897b;
   color: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  animation: fadeIn 0.5s ease-in-out;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
 }
 
-.info-box p {
-  margin-left: 1rem;
+button:hover {
+  background-color: #00695c;
+  transform: scale(1.05);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

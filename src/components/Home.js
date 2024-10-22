@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ParticleBackground from './ParticleBackground';
 import TopProjects from './TopProjects';
-import GitHubVisualization from './GitHubVisualization'; // Import the GitHub Achievements component
-import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from 'react-icons/ai';
+import GitHubVisualization from './GitHubVisualization';
+import { AiFillGithub, AiFillLinkedin, AiOutlineMail, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
 import RandomFactHeader from './RandomFactHeader';
@@ -10,6 +10,7 @@ import RandomFactHeader from './RandomFactHeader';
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentFeature, setCurrentFeature] = useState('');
+  const skillContainerRef = useRef(null);
 
   const openModal = (feature) => {
     setCurrentFeature(feature);
@@ -19,6 +20,15 @@ export default function Home() {
   const closeModal = () => {
     setModalOpen(false);
     setCurrentFeature('');
+  };
+
+  // Scroll functions for the skill section arrow buttons
+  const scrollLeft = () => {
+    skillContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    skillContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
   };
 
   // Skills data
@@ -114,14 +124,35 @@ export default function Home() {
       {/* Skills Section */}
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
         <h2 className="text-4xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
-        <div className="flex justify-center overflow-x-auto">
-          <div className="flex space-x-4">
+        <div className="relative flex justify-center items-center">
+          {/* Left Scroll Button */}
+          <button 
+            className="absolute left-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+            onClick={scrollLeft}
+          >
+            <AiOutlineLeft size={24} />
+          </button>
+
+          <div ref={skillContainerRef} className="flex overflow-x-auto scrollbar-hide space-x-4 skill-wrapper">
             {skills.map((skill, index) => (
-              <div key={index} className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 text-center">
-                <p className="text-xl font-bold">{skill}</p>
-              </div>
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }} // Add hover effect
+                transition={{ type: "spring", stiffness: 300 }}
+                className="skill-box bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 text-center cursor-pointer"
+              >
+                <p className="text-xl font-bold transition-colors duration-300">{skill}</p>
+              </motion.div>
             ))}
           </div>
+
+          {/* Right Scroll Button */}
+          <button 
+            className="absolute right-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+            onClick={scrollRight}
+          >
+            <AiOutlineRight size={24} />
+          </button>
         </div>
       </section>
 
@@ -130,19 +161,34 @@ export default function Home() {
         <h2 className="text-4xl text-center mb-8 text-teal-600 dark:text-teal-400">GitHub Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10">
           {/* GitHub Stats Card */}
-          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onClick={() => openModal('GitHub Stats')}>
-            <h3 className="text-2xl font-bold mb-4 text-center text-teal-600">GitHub Stats</h3>
-          </div>
+          <motion.div
+            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
+            whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
+            transition={{ duration: 0.3 }}
+            onClick={() => openModal('GitHub Stats')}
+          >
+            <h3 className="text-2xl font-bold mb-4 text-teal-600">GitHub Stats</h3>
+          </motion.div>
 
           {/* Contribution Graph Card */}
-          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onClick={() => openModal('Contribution Graph')}>
-            <h3 className="text-2xl font-bold mb-4 text-center text-teal-600">Contribution Graph</h3>
-          </div>
+          <motion.div
+            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
+            whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
+            transition={{ duration: 0.3 }}
+            onClick={() => openModal('Contribution Graph')}
+          >
+            <h3 className="text-2xl font-bold mb-4 text-teal-600">Contribution Graph</h3>
+          </motion.div>
 
           {/* Top Languages Card */}
-          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300 cursor-pointer" onClick={() => openModal('Top Languages')}>
-            <h3 className="text-2xl font-bold mb-4 text-center text-teal-600">Top Languages</h3>
-          </div>
+          <motion.div
+            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
+            whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
+            transition={{ duration: 0.3 }}
+            onClick={() => openModal('Top Languages')}
+          >
+            <h3 className="text-2xl font-bold mb-4 text-teal-600">Top Languages</h3>
+          </motion.div>
         </div>
       </section>
 
@@ -192,7 +238,7 @@ export default function Home() {
       <TopProjects />
 
       {/* GitHub Achievements Section */}
-      <GitHubVisualization /> {/* Add the GitHub Achievements chart here */}
+      <GitHubVisualization />
     </>
   );
 }

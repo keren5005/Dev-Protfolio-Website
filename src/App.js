@@ -18,6 +18,15 @@ function App() {
   const [showToolbar, setShowToolbar] = useState(false);
 
   useEffect(() => {
+    // Apply the dark mode to the body and html element
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      document.body.classList.add('bg-gray-900');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('bg-gray-900');
+    }
+
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
@@ -34,8 +43,9 @@ function App() {
   };
 
   return (
-    <div className={`${darkMode ? 'dark' : ''} transition-colors duration-300`}>
+    <div className={`${darkMode ? 'dark' : ''} transition-colors duration-300 min-h-screen`}>
       <Router>
+        {/* Navbar remains unchanged */}
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
         {/* Toggle button for the global toolbar */}
@@ -79,8 +89,8 @@ function App() {
           </div>
         </div>
 
-        {/* Page Content */}
-        <main className="container mx-auto p-4 sm:p-6 lg:p-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen">
+        {/* Page Content with background applied to full width and height */}
+        <main className="container mx-auto p-4 sm:p-6 lg:p-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex flex-col justify-between">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
