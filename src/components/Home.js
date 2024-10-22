@@ -21,7 +21,6 @@ export default function Home() {
     setCurrentFeature('');
   };
 
-  // Scroll functions for the skill section arrow buttons
   const scrollLeft = () => {
     skillContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
   };
@@ -30,7 +29,6 @@ export default function Home() {
     skillContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
   };
 
-  // Skills data
   const skills = [
     'JavaScript',
     'TypeScript',
@@ -59,12 +57,12 @@ export default function Home() {
         <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
           <ParticleBackground />
           <motion.div
-            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-10 safe-zone"
+            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-5"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md mx-auto">
+            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md mx-auto mt-10">
               <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400">
                 <img
                   src="/avatarPictures/hi.png" 
@@ -82,15 +80,30 @@ export default function Home() {
                 a difference!
               </p>
               <div className="text-3xl flex justify-center gap-4 py-3 text-gray-600 dark:text-gray-400">
-                <a href="https://github.com/keren5005" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500">
-                  <AiFillGithub />
-                </a>
-                <a href="https://www.linkedin.com/in/keren-cohen-aa6987215/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500">
-                  <AiFillLinkedin />
-                </a>
-                <a href="mailto:keren5005005@gmail.com" className="hover:text-teal-500">
-                  <AiOutlineMail />
-                </a>
+                <div className="flex justify-center items-center gap-2">
+                  <a
+                    href="https://github.com/keren5005"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-teal-500"
+                  >
+                    <AiFillGithub />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-teal-500"
+                  >
+                    <AiFillLinkedin />
+                  </a>
+                  <a
+                    href="mailto:keren5005005@gmail.com"
+                    className="hover:text-teal-500"
+                  >
+                    <AiOutlineMail />
+                  </a>
+                </div>
               </div>
               <a
                 href="/Keren Cohen Software Developer CV.pdf"
@@ -108,8 +121,9 @@ export default function Home() {
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
         <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
         <div className="relative flex justify-center items-center">
+          {/* Left Scroll Button */}
           <button 
-            className="absolute left-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+            className="absolute left-2 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollLeft}
           >
             <AiOutlineLeft size={24} />
@@ -128,8 +142,9 @@ export default function Home() {
             ))}
           </div>
 
+          {/* Right Scroll Button */}
           <button 
-            className="absolute right-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+            className="absolute right-2 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollRight}
           >
             <AiOutlineRight size={24} />
@@ -170,7 +185,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modal for Displaying GitHub Features */}
       {modalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-xl w-full transition-transform transform scale-110">
@@ -212,10 +226,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* TopProjects Section */}
       <TopProjects />
-
-      {/* GitHub Achievements Section */}
       <GitHubVisualization />
     </>
   );

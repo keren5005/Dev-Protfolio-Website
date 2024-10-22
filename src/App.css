@@ -132,3 +132,18 @@ button:hover {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.skill-box {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 5px;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+
+.skill-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
