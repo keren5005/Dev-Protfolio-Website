@@ -60,59 +60,55 @@ export default function Home() {
         <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
           <ParticleBackground />
           <motion.div
-            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-10 safe-zone"
+            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-5 sm:p-10"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-8 transition-transform transform hover:scale-105">
-              <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-teal-600 dark:border-teal-400">
+            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 sm:p-8 transition-transform transform hover:scale-105 max-w-lg mx-auto">
+              <div className="w-32 sm:w-40 h-32 sm:h-40 rounded-full overflow-hidden mb-4 sm:mb-6 border-4 border-teal-600 dark:border-teal-400">
                 <img
-                  src="/avatarPictures/hi.png" 
+                  src="/avatarPictures/hi.png"
                   alt="Profile Picture"
                   className="object-cover w-full h-full"
                 />
               </div>
-              <h2 className="text-5xl font-bold text-teal-600 dark:text-teal-400">
+              <h2 className="text-4xl sm:text-5xl font-bold text-teal-600 dark:text-teal-400">
                 Keren Cohen
               </h2>
-              <h3 className="text-2xl py-2 dark:text-gray-300">Software Developer</h3>
-              <p className="text-lg py-5 leading-8 max-w-xl mx-auto text-gray-800 dark:text-gray-200">
-                Hi! I'm Keren 👋💻. A driven Junior Developer ready to contribute, learn,
-                and grow. Eager for my first role to build impactful solutions and make
-                a difference!
+              <h3 className="text-xl sm:text-2xl py-1 sm:py-2 dark:text-gray-300">Software Developer</h3>
+              <p className="text-base sm:text-lg py-4 sm:py-5 leading-7 sm:leading-8 max-w-xl mx-auto text-gray-800 dark:text-gray-200">
+                Hi! I'm Keren 👋💻. A driven Junior Developer ready to contribute, learn, and grow. Eager for my first role to build impactful solutions and make a difference!
               </p>
-              <div className="text-4xl flex justify-center gap-4 py-4 text-gray-600 dark:text-gray-400">
-                <div className="flex justify-center items-center gap-3">
-                  <a
-                    href="https://github.com/keren5005"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-500"
-                  >
-                    <AiFillGithub />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-500"
-                  >
-                    <AiFillLinkedin />
-                  </a>
-                  <a
-                    href="mailto:keren5005005@gmail.com"
-                    className="hover:text-teal-500"
-                  >
-                    <AiOutlineMail />
-                  </a>
-                </div>
+              <div className="text-3xl sm:text-4xl flex justify-center gap-4 py-3 sm:py-4 text-gray-600 dark:text-gray-400">
+                <a
+                  href="https://github.com/keren5005"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-teal-500"
+                >
+                  <AiFillGithub />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-teal-500"
+                >
+                  <AiFillLinkedin />
+                </a>
+                <a
+                  href="mailto:keren5005005@gmail.com"
+                  className="hover:text-teal-500"
+                >
+                  <AiOutlineMail />
+                </a>
               </div>
               {/* Download Resume Button */}
               <a
                 href="/Keren Cohen Software Developer CV.pdf"
                 download="Keren_Cohen_Resume"
-                className="mt-6 inline-block bg-teal-600 dark:bg-teal-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-500 transition duration-300"
+                className="mt-4 sm:mt-6 inline-block bg-teal-600 dark:bg-teal-400 text-white font-bold py-2 px-4 sm:py-2 sm:px-6 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-500 transition duration-300"
               >
                 Download Resume
               </a>
@@ -126,8 +122,8 @@ export default function Home() {
         <h2 className="text-4xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
         <div className="relative flex justify-center items-center">
           {/* Left Scroll Button */}
-          <button 
-            className="absolute left-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+          <button
+            className="absolute -left-10 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollLeft}
           >
             <AiOutlineLeft size={24} />
@@ -147,8 +143,8 @@ export default function Home() {
           </div>
 
           {/* Right Scroll Button */}
-          <button 
-            className="absolute right-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+          <button
+            className="absolute -right-10 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollRight}
           >
             <AiOutlineRight size={24} />
