@@ -5,7 +5,6 @@ import GitHubVisualization from './GitHubVisualization';
 import { AiFillGithub, AiFillLinkedin, AiOutlineMail, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
-import RandomFactHeader from './RandomFactHeader';
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -33,24 +32,9 @@ export default function Home() {
 
   // Skills data
   const skills = [
-    'JavaScript',
-    'TypeScript',
-    'C#',
-    'C++',
-    'Python',
-    'Go',
-    'SQL',
-    'Docker',
-    'React',
-    'Node.js',
-    'Git',
-    'Linux',
-    'CSS',
-    'HTML',
-    'REST APIs',
-    'Unity',
-    'Prometheus',
-    'Wireshark',
+    'JavaScript', 'TypeScript', 'C#', 'C++', 'Python', 'Go',
+    'SQL', 'Docker', 'React', 'Node.js', 'Git', 'Linux',
+    'CSS', 'HTML', 'REST APIs', 'Unity', 'Prometheus', 'Wireshark',
   ];
 
   return (
@@ -60,14 +44,14 @@ export default function Home() {
         <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
           <ParticleBackground />
           <motion.div
-            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-10 safe-zone"
+            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-5 md:p-10 safe-zone"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
             {/* Smaller image and container */}
-            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md mx-auto">
-              <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400">
+            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md w-full mx-auto">
+              <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400 mx-auto">
                 <img
                   src="/avatarPictures/hi.png" 
                   alt="Profile Picture"
@@ -128,10 +112,10 @@ export default function Home() {
         <div className="relative flex justify-center items-center">
           {/* Left Scroll Button */}
           <button 
-            className="absolute left-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+            className="absolute left-0 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollLeft}
           >
-            <AiOutlineLeft size={24} />
+            <AiOutlineLeft size={20} />
           </button>
 
           <div ref={skillContainerRef} className="flex overflow-x-auto scrollbar-hide space-x-4 skill-wrapper">
@@ -149,10 +133,10 @@ export default function Home() {
 
           {/* Right Scroll Button */}
           <button 
-            className="absolute right-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+            className="absolute right-0 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollRight}
           >
-            <AiOutlineRight size={24} />
+            <AiOutlineRight size={20} />
           </button>
         </div>
       </section>
