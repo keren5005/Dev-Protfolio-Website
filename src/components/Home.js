@@ -60,55 +60,60 @@ export default function Home() {
         <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
           <ParticleBackground />
           <motion.div
-            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-5 sm:p-10"
+            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-10 safe-zone"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 sm:p-8 transition-transform transform hover:scale-105 max-w-lg mx-auto">
-              <div className="w-32 sm:w-40 h-32 sm:h-40 rounded-full overflow-hidden mb-4 sm:mb-6 border-4 border-teal-600 dark:border-teal-400">
+            {/* Smaller image and container */}
+            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md mx-auto">
+              <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400">
                 <img
-                  src="/avatarPictures/hi.png"
+                  src="/avatarPictures/hi.png" 
                   alt="Profile Picture"
                   className="object-cover w-full h-full"
                 />
               </div>
-              <h2 className="text-4xl sm:text-5xl font-bold text-teal-600 dark:text-teal-400">
+              <h2 className="text-4xl font-bold text-teal-600 dark:text-teal-400">
                 Keren Cohen
               </h2>
-              <h3 className="text-xl sm:text-2xl py-1 sm:py-2 dark:text-gray-300">Software Developer</h3>
-              <p className="text-base sm:text-lg py-4 sm:py-5 leading-7 sm:leading-8 max-w-xl mx-auto text-gray-800 dark:text-gray-200">
-                Hi! I'm Keren 👋💻. A driven Junior Developer ready to contribute, learn, and grow. Eager for my first role to build impactful solutions and make a difference!
+              <h3 className="text-xl py-2 dark:text-gray-300">Software Developer</h3>
+              <p className="text-base py-3 leading-7 max-w-lg mx-auto text-gray-800 dark:text-gray-200">
+                Hi! I'm Keren 👋💻. A driven Junior Developer ready to contribute, learn,
+                and grow. Eager for my first role to build impactful solutions and make
+                a difference!
               </p>
-              <div className="text-3xl sm:text-4xl flex justify-center gap-4 py-3 sm:py-4 text-gray-600 dark:text-gray-400">
-                <a
-                  href="https://github.com/keren5005"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-teal-500"
-                >
-                  <AiFillGithub />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-teal-500"
-                >
-                  <AiFillLinkedin />
-                </a>
-                <a
-                  href="mailto:keren5005005@gmail.com"
-                  className="hover:text-teal-500"
-                >
-                  <AiOutlineMail />
-                </a>
+              <div className="text-3xl flex justify-center gap-4 py-3 text-gray-600 dark:text-gray-400">
+                <div className="flex justify-center items-center gap-2">
+                  <a
+                    href="https://github.com/keren5005"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-teal-500"
+                  >
+                    <AiFillGithub />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-teal-500"
+                  >
+                    <AiFillLinkedin />
+                  </a>
+                  <a
+                    href="mailto:keren5005005@gmail.com"
+                    className="hover:text-teal-500"
+                  >
+                    <AiOutlineMail />
+                  </a>
+                </div>
               </div>
               {/* Download Resume Button */}
               <a
                 href="/Keren Cohen Software Developer CV.pdf"
                 download="Keren_Cohen_Resume"
-                className="mt-4 sm:mt-6 inline-block bg-teal-600 dark:bg-teal-400 text-white font-bold py-2 px-4 sm:py-2 sm:px-6 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-500 transition duration-300"
+                className="mt-4 inline-block bg-teal-600 dark:bg-teal-400 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-500 transition duration-300"
               >
                 Download Resume
               </a>
@@ -119,11 +124,11 @@ export default function Home() {
 
       {/* Skills Section */}
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
-        <h2 className="text-4xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
+        <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
         <div className="relative flex justify-center items-center">
           {/* Left Scroll Button */}
-          <button
-            className="absolute -left-10 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+          <button 
+            className="absolute left-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollLeft}
           >
             <AiOutlineLeft size={24} />
@@ -137,14 +142,14 @@ export default function Home() {
                 transition={{ type: "spring", stiffness: 300 }}
                 className="skill-box bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 text-center cursor-pointer"
               >
-                <p className="text-xl font-bold transition-colors duration-300">{skill}</p>
+                <p className="text-lg font-bold transition-colors duration-300">{skill}</p>
               </motion.div>
             ))}
           </div>
 
           {/* Right Scroll Button */}
-          <button
-            className="absolute -right-10 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
+          <button 
+            className="absolute right-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollRight}
           >
             <AiOutlineRight size={24} />
@@ -154,7 +159,7 @@ export default function Home() {
 
       {/* GitHub Features Section */}
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
-        <h2 className="text-4xl text-center mb-8 text-teal-600 dark:text-teal-400">GitHub Features</h2>
+        <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">GitHub Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10">
           {/* GitHub Stats Card */}
           <motion.div
