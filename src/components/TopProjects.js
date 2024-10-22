@@ -38,13 +38,16 @@ function TopProjects() {
     <section className="py-10 bg-gray-50 dark:bg-gray-900">
       <h2 className="text-4xl font-semibold text-center mb-8 text-teal-600 dark:text-teal-400">Top Projects</h2>
       <div className="relative flex justify-center items-center max-w-full overflow-hidden">
-        {/* Left Scroll Button */}
+      {/* Left Scroll Button */}
         <motion.button 
-          className="absolute left-0 z-10 bg-teal-500 text-white p-3 rounded-full shadow-md hover:bg-teal-600 transition"
-          whileHover={{ scale: 1.05 }}
-          onClick={() => scrollLeft(projectsContainerRef)}
+        className="absolute left-0 z-10 bg-teal-500 text-white p-3 rounded-full shadow-md hover:bg-teal-600 transition"
+        whileHover={{ scale: 1.05 }}
+        onClick={() => {
+            console.log("Left button clicked"); // Debugging log
+            scrollLeft(projectsContainerRef);
+        }}
         >
-          <AiOutlineLeft size={20} />
+        <AiOutlineLeft size={20} />
         </motion.button>
 
         {/* Projects Wrapper */}

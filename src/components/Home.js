@@ -37,6 +37,7 @@ export default function Home() {
 
   return (
     <>
+      {/* Parallax Hero Section */}
       <Parallax bgImage="/path-to-background-image.jpg" strength={300}>
         <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
           <ParticleBackground />
@@ -86,6 +87,7 @@ export default function Home() {
         </section>
       </Parallax>
 
+      {/* Skills Section */}
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
         <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
         <div className="relative flex justify-center items-center">
@@ -99,20 +101,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Add other sections here... */}
+      {/* Top Projects Section */}
       <TopProjects />
+      
+{/* GitHub Features Section */}
+<section className="py-10 bg-gray-50 dark:bg-gray-800">
+  <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">GitHub Features</h2>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10">
+    <motion.div
+      className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
+      whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
+      transition={{ duration: 0.3 }}
+      onClick={() => openModal('GitHub Stats')}
+    >
+      <h3 className="text-2xl font-bold mb-4 text-teal-600">GitHub Stats</h3>
+    </motion.div>
+    <motion.div
+      className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
+      whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
+      transition={{ duration: 0.3 }}
+      onClick={() => openModal('Contribution Graph')}
+    >
+      <h3 className="text-2xl font-bold mb-4 text-teal-600">Contribution Graph</h3>
+    </motion.div>
+    <motion.div
+      className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
+      whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
+      transition={{ duration: 0.3 }}
+      onClick={() => openModal('Top Languages')}
+    >
+      <h3 className="text-2xl font-bold mb-4 text-teal-600">Top Languages</h3>
+    </motion.div>
+  </div>
+</section>
+
+{/* Modal for Displaying GitHub Features */}
+{modalOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-xl w-full transition-transform transform scale-110">
+      <h2 className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-4">{currentFeature}</h2>
+      {currentFeature === 'GitHub Stats' && (
+        <img
+          src="https://github-readme-stats.vercel.app/api?username=keren5005&show_icons=true&theme=radical"
+          alt="GitHub Stats"
+        />
+      )}
+      {currentFeature === 'Contribution Graph' && (
+        <img
+          src="https://ghchart.rshah.org/keren5005"
+          alt="Contribution Graph"
+        />
+      )}
+      {currentFeature === 'Top Languages' && (
+        <img
+          src="https://github-readme-stats.vercel.app/api/top-langs/?username=keren5005&layout=compact&theme=radical"
+          alt="Top Languages"
+        />
+      )}
+      <button onClick={closeModal} className="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
+    </div>
+  </div>
+)}
+
+
+      {/* GitHub Visualization Section */}
       <GitHubVisualization />
 
-      {/* Modal for Displaying GitHub Features */}
-      {modalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-xl w-full transition-transform transform scale-110">
-            <h2 className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-4">{currentFeature}</h2>
-            {/* Modal content based on currentFeature */}
-            <button onClick={closeModal} className="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
-          </div>
-        </div>
-      )}
     </>
   );
 }
