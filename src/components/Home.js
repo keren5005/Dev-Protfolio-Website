@@ -32,9 +32,24 @@ export default function Home() {
 
   // Skills data
   const skills = [
-    'JavaScript', 'TypeScript', 'C#', 'C++', 'Python', 'Go',
-    'SQL', 'Docker', 'React', 'Node.js', 'Git', 'Linux',
-    'CSS', 'HTML', 'REST APIs', 'Unity', 'Prometheus', 'Wireshark',
+    'JavaScript',
+    'TypeScript',
+    'C#',
+    'C++',
+    'Python',
+    'Go',
+    'SQL',
+    'Docker',
+    'React',
+    'Node.js',
+    'Git',
+    'Linux',
+    'CSS',
+    'HTML',
+    'REST APIs',
+    'Unity',
+    'Prometheus',
+    'Wireshark',
   ];
 
   return (
@@ -44,14 +59,13 @@ export default function Home() {
         <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
           <ParticleBackground />
           <motion.div
-            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-5 md:p-10 safe-zone"
+            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-10 safe-zone"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            {/* Smaller image and container */}
-            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md w-full mx-auto">
-              <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400 mx-auto">
+            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 max-w-md mx-auto">
+              <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400">
                 <img
                   src="/avatarPictures/hi.png" 
                   alt="Profile Picture"
@@ -68,32 +82,16 @@ export default function Home() {
                 a difference!
               </p>
               <div className="text-3xl flex justify-center gap-4 py-3 text-gray-600 dark:text-gray-400">
-                <div className="flex justify-center items-center gap-2">
-                  <a
-                    href="https://github.com/keren5005"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-500"
-                  >
-                    <AiFillGithub />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-teal-500"
-                  >
-                    <AiFillLinkedin />
-                  </a>
-                  <a
-                    href="mailto:keren5005005@gmail.com"
-                    className="hover:text-teal-500"
-                  >
-                    <AiOutlineMail />
-                  </a>
-                </div>
+                <a href="https://github.com/keren5005" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500">
+                  <AiFillGithub />
+                </a>
+                <a href="https://www.linkedin.com/in/keren-cohen-aa6987215/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500">
+                  <AiFillLinkedin />
+                </a>
+                <a href="mailto:keren5005005@gmail.com" className="hover:text-teal-500">
+                  <AiOutlineMail />
+                </a>
               </div>
-              {/* Download Resume Button */}
               <a
                 href="/Keren Cohen Software Developer CV.pdf"
                 download="Keren_Cohen_Resume"
@@ -110,12 +108,11 @@ export default function Home() {
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
         <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">Top Skills</h2>
         <div className="relative flex justify-center items-center">
-          {/* Left Scroll Button */}
           <button 
-            className="absolute left-0 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
+            className="absolute left-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollLeft}
           >
-            <AiOutlineLeft size={20} />
+            <AiOutlineLeft size={24} />
           </button>
 
           <div ref={skillContainerRef} className="flex overflow-x-auto scrollbar-hide space-x-4 skill-wrapper">
@@ -131,12 +128,11 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Right Scroll Button */}
           <button 
-            className="absolute right-0 z-10 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-700 transition"
+            className="absolute right-0 z-10 bg-teal-600 text-white p-3 rounded-full shadow-md hover:bg-teal-700 transition"
             onClick={scrollRight}
           >
-            <AiOutlineRight size={20} />
+            <AiOutlineRight size={24} />
           </button>
         </div>
       </section>
@@ -145,7 +141,6 @@ export default function Home() {
       <section className="py-10 bg-gray-50 dark:bg-gray-800">
         <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">GitHub Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10">
-          {/* GitHub Stats Card */}
           <motion.div
             className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
             whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
@@ -155,7 +150,6 @@ export default function Home() {
             <h3 className="text-2xl font-bold mb-4 text-teal-600">GitHub Stats</h3>
           </motion.div>
 
-          {/* Contribution Graph Card */}
           <motion.div
             className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
             whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
@@ -165,7 +159,6 @@ export default function Home() {
             <h3 className="text-2xl font-bold mb-4 text-teal-600">Contribution Graph</h3>
           </motion.div>
 
-          {/* Top Languages Card */}
           <motion.div
             className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
             whileHover={{ scale: 1.15, boxShadow: "0px 10px 20px rgba(0, 128, 123, 0.3)" }} // Hover effect
