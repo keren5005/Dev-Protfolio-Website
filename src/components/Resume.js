@@ -1,153 +1,170 @@
-// src/components/Resume.js
-import React from "react";
-import { AiOutlineDownload } from "react-icons/ai";
-import { FaBriefcase, FaGraduationCap, FaCode, FaHandsHelping } from "react-icons/fa";
-import { RiStackFill } from "react-icons/ri";
-import { RESUME_PDF, resumeData } from "../data/resumeData";
+import React, { useEffect } from 'react';
+import { RESUME_PDF, resumeData } from '../data/resumeData';
+import './Resume.css';
 
-const Chip = ({ children }) => (
-  <span className="inline-flex items-center rounded-full border border-neutral-300 dark:border-neutral-700 px-3 py-1 text-xs font-medium bg-white dark:bg-neutral-900">
+function DownloadIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+  );
+}
+
+const SkillGroup = ({ label, items }) =>
+  items?.length ? (
+    <div className="skill-group">
+      <h4 className="skill-group__label">{label}</h4>
+      <div className="skill-group__chips">
+        {items.map(item => <span className="chip" key={item}>{item}</span>)}
+      </div>
+    </div>
+  ) : null;
+
+const ResumeSection = ({ label, title, children }) => (
+  <section className="resume-section">
+    <div className="resume-section__header">
+      <span className="section-label">{label}</span>
+      <h2 className="resume-section__title">{title}</h2>
+    </div>
     {children}
-  </span>
-);
-
-const Section = ({ icon, title, children }) => (
-  <section className="pt-8">
-    <h3 className="flex items-center gap-2 text-xl font-semibold">
-      <span className="w-8 h-8 rounded-full bg-teal-500 dark:bg-teal-400 text-white grid place-items-center">
-        {icon}
-      </span>
-      {title}
-    </h3>
-    <div className="mt-4">{children}</div>
-    <hr className="mt-8 border-neutral-200 dark:border-neutral-800" />
   </section>
 );
 
 export default function Resume() {
   const { skills, projects, experience, education, volunteering, certifications } = resumeData;
 
+  useEffect(() => {
+    const els = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+      { threshold: 0.1 }
+    );
+    els.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="px-6 md:px-10 py-12 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100">
-      {/* Header */}
-      <header className="max-w-5xl mx-auto text-center">
-        <h1 className="text-4xl font-semibold tracking-tight">My Resume</h1>
-        <p className="mt-2 text-neutral-700 dark:text-neutral-300">
-          Download the PDF or browse the highlights below.
-        </p>
+    <div className="resume-page">
+      {/* background orbs */}
+      <div className="resume__orb resume__orb--1" />
+      <div className="resume__orb resume__orb--2" />
 
-        <a
-          href={RESUME_PDF || "#"}
-          download
-          className="mt-4 inline-flex items-center gap-2 px-5 py-3 rounded-md bg-teal-500 hover:bg-teal-600 dark:bg-teal-400 dark:hover:bg-teal-500 text-white dark:text-neutral-900 disabled:opacity-60"
-          onClick={(e) => {
-            if (!RESUME_PDF) e.preventDefault();
-          }}
-        >
-          <AiOutlineDownload className="text-lg" />
-          Download Resume
-        </a>
-      </header>
+      <div className="container resume__container">
+        {/* Header */}
+        <header className="resume-header fade-in">
+          <div>
+            <span className="section-label">Curriculum Vitae</span>
+            <h1 className="resume-header__title">Keren Cohen</h1>
+            <p className="resume-header__sub">Software Developer · Backend &amp; Distributed Systems</p>
+          </div>
+          <a
+            href={RESUME_PDF || '#'}
+            download
+            className="btn btn--primary"
+            onClick={e => { if (!RESUME_PDF) e.preventDefault(); }}
+          >
+            <DownloadIcon /> Download PDF
+          </a>
+        </header>
 
-      {/* Content */}
-      <main className="max-w-5xl mx-auto mt-10">
         {/* Skills */}
-        <Section icon={<RiStackFill />} title="Skills">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wide opacity-80">
-                Programming Languages
-              </h4>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {skills.languages.map((l) => (
-                  <Chip key={l}>{l}</Chip>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wide opacity-80">
-                Tech Stack
-              </h4>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {skills.stack.map((t) => (
-                  <Chip key={t}>{t}</Chip>
-                ))}
-              </div>
-            </div>
+        <ResumeSection label="Stack" title="Technical Skills">
+          <div className="skills-grid fade-in">
+            <SkillGroup label="Languages" items={skills.languages} />
+            <SkillGroup label="Frameworks" items={skills.frameworks} />
+            <SkillGroup label="Databases" items={skills.databases} />
+            <SkillGroup label="Messaging" items={skills.messaging} />
+            <SkillGroup label="DevOps & Cloud" items={skills.devops} />
+            <SkillGroup label="AI & Tools" items={skills.aiTools} />
+            <SkillGroup label="Testing" items={skills.testing} />
           </div>
           {skills.spoken && (
-            <p className="mt-4 text-sm opacity-80">
-              <strong>Languages:</strong> {skills.spoken}
+            <p className="resume-spoken fade-in">
+              <strong>Spoken:</strong> {skills.spoken}
             </p>
           )}
-        </Section>
-
-        {/* Projects */}
-        <Section icon={<FaCode />} title="Projects">
-          <ul className="space-y-2 leading-relaxed">
-            {projects.map((p) => (
-              <li key={p.name}>
-                <span className="font-semibold">{p.name}:</span> {p.description}
-              </li>
-            ))}
-          </ul>
-        </Section>
+        </ResumeSection>
 
         {/* Experience */}
-        <Section icon={<FaBriefcase />} title="Experience">
-          <div className="space-y-6">
+        <ResumeSection label="Career" title="Experience">
+          <div className="timeline">
             {experience.map((job, i) => (
-              <div key={i}>
-                <div className="flex flex-wrap items-baseline gap-x-2">
-                  <span className="font-semibold">{job.company}</span>
-                  {job.role && <span className="opacity-80">— {job.role}</span>}
-                  {job.dates && (
-                    <span className="text-sm opacity-70 ml-auto">{job.dates}</span>
-                  )}
+              <div className="timeline-item fade-in" key={i}>
+                <div className="timeline-item__dot" />
+                <div className="timeline-item__body">
+                  <div className="timeline-item__header">
+                    <div>
+                      <h3 className="timeline-item__company">{job.company}</h3>
+                      {job.role && <p className="timeline-item__role">{job.role}</p>}
+                    </div>
+                    {job.dates && <span className="timeline-item__dates">{job.dates}</span>}
+                  </div>
+                  <ul className="timeline-item__bullets">
+                    {job.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                  </ul>
                 </div>
-                <ul className="list-disc pl-5 mt-2 space-y-1">
-                  {job.bullets.map((b, j) => (
-                    <li key={j}>{b}</li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
-        </Section>
+        </ResumeSection>
+
+        {/* Projects */}
+        <ResumeSection label="Open Source" title="Projects">
+          <div className="resume-projects fade-in">
+            {projects.map(p => (
+              <div className="resume-project" key={p.name}>
+                <div className="resume-project__header">
+                  <h3 className="resume-project__name">{p.name}</h3>
+                  {p.link && (
+                    <a href={p.link} target="_blank" rel="noopener noreferrer" className="resume-project__link">
+                      {p.link.replace('https://', '')} →
+                    </a>
+                  )}
+                </div>
+                <p className="resume-project__desc">{p.description}</p>
+              </div>
+            ))}
+          </div>
+        </ResumeSection>
 
         {/* Education */}
-        <Section icon={<FaGraduationCap />} title="Education">
-          <ul className="space-y-2">
+        <ResumeSection label="Academic" title="Education">
+          <ul className="simple-list fade-in">
             {education.map((e, i) => (
               <li key={i}>
-                <span className="font-semibold">{e.place}:</span> {e.details}
+                <span className="simple-list__title">{e.place}</span>
+                <span className="simple-list__detail"> — {e.details}</span>
               </li>
             ))}
           </ul>
-        </Section>
+        </ResumeSection>
 
         {/* Volunteering */}
-        <Section icon={<FaHandsHelping />} title="Volunteering">
-          <ul className="space-y-2">
+        <ResumeSection label="Community" title="Volunteering">
+          <ul className="simple-list fade-in">
             {volunteering.map((v, i) => (
               <li key={i}>
-                <span className="font-semibold">{v.org}:</span> {v.details}
+                <span className="simple-list__title">{v.org}</span>
+                <span className="simple-list__detail"> — {v.details}</span>
               </li>
             ))}
           </ul>
-        </Section>
+        </ResumeSection>
 
         {/* Certifications */}
-        <Section icon={<FaGraduationCap />} title="Certifications">
-          <ul className="space-y-2">
+        <ResumeSection label="Credentials" title="Certifications">
+          <ul className="simple-list fade-in">
             {certifications.map((c, i) => (
               <li key={i}>
-                <span className="font-semibold">{c.name}:</span> {c.details}
+                <span className="simple-list__title">{c.name}</span>
+                <span className="simple-list__detail"> — {c.details}</span>
               </li>
             ))}
           </ul>
-        </Section>
-      </main>
+        </ResumeSection>
+      </div>
     </div>
   );
 }

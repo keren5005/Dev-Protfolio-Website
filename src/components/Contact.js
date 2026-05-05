@@ -1,61 +1,96 @@
 import React from 'react';
-import { AiOutlineMail } from 'react-icons/ai';
-import { AiFillLinkedin } from 'react-icons/ai';
-import { AiFillGithub } from 'react-icons/ai';
+import './Contact.css';
 
-const Contact = () => {
+function MailIcon() {
   return (
-    <section className="container mx-auto p-10 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300">
-      <h2 className="text-4xl text-center mb-8">Contact Me</h2>
-
-      <div className="flex flex-col items-center justify-center">
-        {/* Add Rounded Image */}
-        <div className="mb-6">
-          <img
-            src="/avatarPictures/thumbsUp.png"
-            alt="Thumbs Up"
-            className="rounded-full w-40 h-40 object-cover border-4 border-teal-600"
-          />
-        </div>
-
-        {/* Contact Form */}
-        <form className="w-full max-w-lg bg-gray-100 p-6 rounded-lg shadow-md mb-6">
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700">Name</label>
-            <input type="text" id="name" name="name" className="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700">Email</label>
-            <input type="email" id="email" name="email" className="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="message" className="block text-gray-700">Message</label>
-            <textarea id="message" name="message" className="w-full p-2 border border-gray-300 rounded" rows="4" required></textarea>
-          </div>
-          <button type="submit" className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition duration-300">Send</button>
-        </form>
-
-        {/* Additional Contact Info with Icons */}
-        <div className="mt-6 text-center">
-          <h3 className="text-2xl mb-4">Or Reach Me At:</h3>
-          <div className="flex flex-col items-center space-y-2">
-            <div className="flex items-center space-x-2">
-              <AiOutlineMail className="text-2xl text-teal-600" />
-              <span>Email: <a href="mailto:keren5005005@gmail.com" className="text-teal-600 hover:underline">keren5005005@gmail.com</a></span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <AiFillLinkedin className="text-2xl text-teal-600" />
-              <span>LinkedIn: <a href="https://www.linkedin.com/in/keren-cohen-aa6987215/" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline">linkedin.com/in/keren-cohen-aa6987215</a></span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <AiFillGithub className="text-2xl text-teal-600" />
-              <span>GitHub: <a href="https://github.com/keren5005" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline">github.com/keren5005</a></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2"/>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </svg>
   );
-};
+}
 
-export default Contact;
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect x="2" y="9" width="4" height="12"/>
+      <circle cx="4" cy="4" r="2"/>
+    </svg>
+  );
+}
+
+function GitHubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    </svg>
+  );
+}
+
+const LINKS = [
+  {
+    href: 'mailto:keren5005005@gmail.com',
+    Icon: MailIcon,
+    label: 'Email',
+    sub: 'keren5005005@gmail.com',
+  },
+  {
+    href: 'https://www.linkedin.com/in/keren-cohen-aa6987215/',
+    Icon: LinkedInIcon,
+    label: 'LinkedIn',
+    sub: 'linkedin.com/in/keren-cohen-aa6987215',
+  },
+  {
+    href: 'https://github.com/keren5005',
+    Icon: GitHubIcon,
+    label: 'GitHub',
+    sub: 'github.com/keren5005',
+  },
+];
+
+export default function Contact() {
+  return (
+    <div className="contact-page">
+      {/* background orbs */}
+      <div className="contact__orb contact__orb--1" />
+      <div className="contact__orb contact__orb--2" />
+
+      <div className="contact__inner">
+        <div className="contact__avatar-wrap">
+          <img src="/avatarPictures/thumbsUp.png" alt="Keren Cohen" className="contact__avatar" />
+        </div>
+
+        <span className="section-label">Contact</span>
+        <h1 className="contact__title">Get in touch</h1>
+        <p className="contact__sub">
+          Open to mid-senior software engineering roles. Whether it's a position, a collaboration,
+          or just a conversation about distributed systems — reach out.
+        </p>
+
+        <div className="contact__links">
+          {LINKS.map(({ href, Icon, label, sub }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith('mailto') ? undefined : '_blank'}
+              rel="noopener noreferrer"
+              className="contact__link"
+            >
+              <span className="contact__link-icon">
+                <Icon />
+              </span>
+              <div>
+                <p className="contact__link-label">{label}</p>
+                <p className="contact__link-sub">{sub}</p>
+              </div>
+              <span className="contact__link-arrow">→</span>
+            </a>
+          ))}
+        </div>
+
+        <p className="contact__footnote">Based in Israel · Available for on-site, hybrid, or remote</p>
+      </div>
+    </div>
+  );
+}

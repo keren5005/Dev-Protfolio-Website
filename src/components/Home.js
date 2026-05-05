@@ -1,370 +1,249 @@
-// src/components/Home.js
-import React, { useState } from 'react';
-import ParticleBackground from './ParticleBackground';
-import GitHubVisualization from './GitHubVisualization';
-import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from 'react-icons/ai';
-import { motion } from 'framer-motion';
-import { Parallax } from 'react-parallax';
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { resumeData } from '../data/resumeData';
+import './Home.css';
 
-// ✅ SimpleIcons (correct names)
-import {
-  SiSpringboot,
-  SiOpenjdk,
-  SiPython,
-  SiFastapi,
-  SiCplusplus,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNodedotjs,
-  SiSwagger,
-  SiPostman,
-  SiApachekafka,
-  SiRedis,
-  SiMongodb,
-  SiPostgresql,
-  SiElasticsearch,
-  SiDocker,
-  SiLinux,
-  SiJenkins,
-  SiGo,
-  SiPrometheus,
-} from 'react-icons/si';
+const STATS = [
+  { num: '3+',      desc: 'years of industry experience' },
+  { num: '3',       desc: 'companies shipped to production' },
+  { num: '8200',    desc: 'intelligence unit alumna' },
+  { num: 'B.Sc.',   desc: 'computer science' },
+];
 
-/* ------------------------- Small tag pill helper ------------------------- */
-const Tag = ({ icon, label }) => (
-  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-sm text-gray-800 dark:text-gray-200">
-    <span className="text-lg">{icon}</span>
-    {label}
-  </span>
-);
+const SKILL_SIDEBAR = [
+  {
+    title: 'Languages',
+    items: ['Java', 'Python', 'TypeScript', 'JavaScript', 'Go', 'SQL', 'C#'],
+  },
+  {
+    title: 'Stack',
+    items: ['Spring Boot', 'Node.js / Express', 'FastAPI', 'Docker', 'AWS (EC2, S3)', 'Kafka', 'PostgreSQL', 'MongoDB', 'Redis'],
+  },
+];
 
-/* ------------------------- Project list card helper ------------------------- */
-const ProjectItem = ({ title, blurb, tags, link }) => (
-  <article className="w-full rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-6 shadow-sm">
-    <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h4>
-    <p className="mt-3 text-gray-700 dark:text-gray-300">{blurb}</p>
-
-    <div className="mt-4 flex flex-wrap gap-2">
-      {tags.map((t, i) => (
-        <Tag key={i} icon={t.icon} label={t.label} />
-      ))}
-    </div>
-
-    <div className="mt-5">
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-teal-500 text-white hover:bg-teal-600"
-      >
-        <AiFillGithub />
-        View on GitHub
-      </a>
-    </div>
-  </article>
-);
+const exp = resumeData.experience[0];
 
 export default function Home() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentFeature, setCurrentFeature] = useState('');
+  const aboutRef = useRef(null);
 
-  const openModal = (feature) => {
-    setCurrentFeature(feature);
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-    setCurrentFeature('');
-  };
+  useEffect(() => {
+    const els = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
+      { threshold: 0.12 }
+    );
+    els.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
-  // Toolbox-style skills (grid)
-  const skills = [
-    { label: 'Java (Spring Boot)', icon: <SiSpringboot /> },
-    { label: 'Java (OpenJDK)', icon: <SiOpenjdk /> },
-    { label: 'Python', icon: <SiPython /> },
-    { label: 'FastAPI', icon: <SiFastapi /> },
-    { label: 'C++', icon: <SiCplusplus /> },
-    { label: 'JavaScript', icon: <SiJavascript /> },
-    { label: 'TypeScript', icon: <SiTypescript /> },
-    { label: 'React', icon: <SiReact /> },
-    { label: 'Node.js', icon: <SiNodedotjs /> },
-    { label: 'REST APIs', icon: <SiSwagger /> },
-    { label: 'Postman', icon: <SiPostman /> },
-    { label: 'Kafka', icon: <SiApachekafka /> },
-    { label: 'Redis', icon: <SiRedis /> },
-    { label: 'MongoDB', icon: <SiMongodb /> },
-    { label: 'PostgreSQL', icon: <SiPostgresql /> },
-    { label: 'Elasticsearch', icon: <SiElasticsearch /> },
-    { label: 'Docker', icon: <SiDocker /> },
-    { label: 'Linux', icon: <SiLinux /> },
-    { label: 'Jenkins', icon: <SiJenkins /> },
-  ];
-
-  const funFacts = ['Started programming at 14', 'Military & industry experience'];
-
-  /* ------------------------------- Projects ------------------------------- */
-  const featured = {
-    title: 'Dockerized Personal Finance Tracker',
-    blurb:
-      'Full-stack personal finance app with FastAPI backend, React UI, PostgreSQL database, optional Redis cache — all containerized with Docker Compose.',
-    tags: [
-      { icon: <SiDocker />, label: 'Docker' },
-      { icon: <SiFastapi />, label: 'FastAPI' },
-      { icon: <SiReact />, label: 'React' },
-      { icon: <SiPostgresql />, label: 'PostgreSQL' },
-      { icon: <SiPython />, label: 'Python' },
-      { icon: <SiRedis />, label: 'Redis' },
-    ],
-    link: 'https://github.com/keren5005/Dockerized-Personal-Finance-Tracker',
-  };
-
-  const projects = [
-    {
-      title: 'PromLink',
-      blurb:
-        'Open-source contribution to Prometheus, written in Go, integrating the Alertmanager component with Mattermost and Rocket.Chat.',
-      tags: [
-        { icon: <SiGo />, label: 'Go' },
-        { icon: <SiPrometheus />, label: 'Prometheus' },
-      ],
-      link: 'https://github.com/keren5005/prom-link', // update if different
-    },
-    {
-      title: 'Job Search Manager',
-      blurb:
-        'Job search management app integrating job listing APIs to manage and track applications.',
-      tags: [
-        { icon: <SiReact />, label: 'React' },
-        { icon: <SiNodedotjs />, label: 'Node.js' },
-        { icon: <SiPostgresql />, label: 'PostgreSQL' },
-      ],
-      link: 'https://github.com/keren5005/job-search-manager', // update if different
-    },
-    {
-      title: 'Fully Connected Feed Forward NN',
-      blurb:
-        'A neural network built in Python for image recognition with multiple activation functions and clear training metrics.',
-      tags: [{ icon: <SiPython />, label: 'Python' }],
-      link: 'https://github.com/keren5005/FC-Feed-Forward-NN', // update if different
-    },
-  ];
+  const scrollToAbout = () => aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <>
-      {/* Hero */}
-      <Parallax bgImage="/hero-bg.jpg" strength={200}>
-        <section className="relative h-screen overflow-hidden bg-white dark:bg-gray-900">
-          <ParticleBackground />
-          <motion.div
-            className="relative z-10 text-center flex flex-col items-center justify-center h-full p-4"
-            initial={{ y: -40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9 }}
-          >
-            <div className="bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-6 max-w-lg w-[92%] md:w-auto">
-              <div className="w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-teal-600 dark:border-teal-400 mx-auto">
-                <img
-                  src="/avatarPictures/hi.png"
-                  alt="Keren Cohen avatar"
-                  className="object-cover w-full h-full"
-                />
-              </div>
+      {/* ── HERO ── */}
+      <section className="hero">
+        <div className="hero__overlay" />
+        <div className="hero__orb hero__orb--1" />
+        <div className="hero__orb hero__orb--2" />
+        <div className="hero__orb hero__orb--3" />
+        <div className="hero__grain" />
 
-              <h1 className="text-4xl font-bold text-teal-600 dark:text-teal-400">
-                Keren Cohen
-              </h1>
-              <h2 className="text-xl mt-1 mb-3 dark:text-gray-300">Software Developer</h2>
-
-              <p className="text-base leading-7 max-w-xl mx-auto text-gray-800 dark:text-gray-200">
-                Software Developer with <strong>military</strong> and <strong>industry</strong>{' '}
-                experience. I craft reliable backends, clean APIs, and data-driven services.
-                Lifelong builder who<strong> started coding at 14</strong> — I love shipping practical
-                solutions that help people.
-              </p>
-
-              {/* Fun facts */}
-              <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-700 dark:text-gray-300">
-                {funFacts.map((f, i) => (
-                  <li
-                    key={i}
-                    className="px-3 py-2 rounded-md bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
-                  >
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Socials */}
-              <div className="text-3xl flex justify-center gap-4 py-4 text-gray-600 dark:text-gray-400">
-                <a
-                  href="https://github.com/keren5005"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-teal-500"
-                  aria-label="GitHub"
-                >
-                  <AiFillGithub />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/keren-cohen-aa6987215/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-teal-500"
-                  aria-label="LinkedIn"
-                >
-                  <AiFillLinkedin />
-                </a>
-                <a href="mailto:keren5005005@gmail.com" className="hover:text-teal-500" aria-label="Email">
-                  <AiOutlineMail />
-                </a>
-              </div>
-
-              <a
-                href="/resume"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-teal-500 text-white hover:bg-teal-600 transition"
-              >
-                View Resume
-              </a>
-            </div>
-          </motion.div>
-        </section>
-      </Parallax>
-
-      {/* Top Skills */}
-      <section className="py-12 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl text-center mb-2 text-teal-600 dark:text-teal-400">Top Skills</h2>
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-8">Tech Stack</p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {skills.map((s, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-4 py-3 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition"
-              >
-                <span className="text-2xl">{s.icon}</span>
-                <span className="font-semibold">{s.label}</span>
-              </div>
-            ))}
+        <div className="hero__content">
+          <p className="hero__eyebrow">Software Developer · Backend &amp; Distributed Systems</p>
+          <h1 className="hero__name">
+            <img
+              src="/avatarPictures/hi.png"
+              alt="Keren Cohen"
+              className="hero__avatar"
+            />
+            Keren Cohen
+          </h1>
+          <p className="hero__tagline">
+            Building reliable, scalable backend systems — from distributed pipelines to AI-driven tools.
+            8200 Alumna with a B.Sc. in Computer Science and a passion for high-quality code.
+          </p>
+          <div className="hero__ctas">
+            <button className="btn btn--primary" onClick={scrollToAbout}>About me</button>
+            <Link to="/projects" className="btn btn--outline">View Projects</Link>
           </div>
         </div>
+
+        <button className="hero__scroll-hint" onClick={scrollToAbout} aria-label="Scroll down">
+          <span className="hero__scroll-arrow" />
+        </button>
       </section>
 
-      {/* 🔝 Unified Top Projects (Featured + list) */}
-      <section className="py-10 bg-white dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-semibold text-center text-teal-600 dark:text-teal-400 mb-8">
-            Top Projects
-          </h2>
+      {/* ── ABOUT ── */}
+      <section className="about" ref={aboutRef}>
+        <div className="container">
+          <div className="section-header fade-in">
+            <span className="section-label">About</span>
+            <h2 className="section-title">Who I am</h2>
+          </div>
 
-          {/* Featured goes first */}
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-6 shadow-sm mb-10">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300">
-                Featured
-              </span>
-              <h3 className="text-xl font-bold dark:text-gray-100">{featured.title}</h3>
+          <div className="about__grid">
+            <div className="about__avatar-col fade-in">
+              <div className="about__avatar-wrap">
+                <img src="/avatarPictures/coding.png" alt="Keren Cohen coding" className="about__avatar-img" />
+              </div>
             </div>
 
-            <p className="mt-2 text-gray-700 dark:text-gray-300">{featured.blurb}</p>
+            <div className="about__text fade-in">
+              <p>
+                Software Developer with industry and military experience, currently working as the
+                first in-house developer at Simploud directly under the CTO. I specialise in
+                backend architecture, distributed systems, and building the kind of code that lasts —
+                clean, tested, and maintainable.
+              </p>
+              <p>
+                Before joining industry, I served in Unit 8200 as both a Cyber Security Analyst and
+                a Software Developer, building ETL pipelines and applying secure design principles
+                under real operational constraints. I bring that same rigour to every codebase I touch.
+              </p>
+              <div className="about__actions">
+                <Link to="/resume" className="btn btn--primary">Full Resume</Link>
+                <Link to="/projects" className="btn btn--ghost">My Projects</Link>
+              </div>
+            </div>
 
-            <div className="flex flex-wrap gap-3 mt-4 text-gray-800 dark:text-gray-200">
-              {featured.tags.map((t, i) => (
-                <Tag key={i} icon={t.icon} label={t.label} />
+            <div className="about__sidebar fade-in">
+              {SKILL_SIDEBAR.map(card => (
+                <div className="about__card" key={card.title}>
+                  <h3 className="about__card-title">{card.title}</h3>
+                  <ul className="about__list">
+                    {card.items.map(item => (
+                      <li key={item}>
+                        <span className="about__list-label">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-5">
-              <a
-                href={featured.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 rounded-md bg-teal-500 text-white hover:bg-teal-600"
-              >
-                View on GitHub
-              </a>
+      {/* ── STATS STRIP ── */}
+      <section className="highlight fade-in">
+        <div className="container highlight__grid">
+          {STATS.map(s => (
+            <div className="highlight__stat" key={s.desc}>
+              <span className="highlight__num">{s.num}</span>
+              <span className="highlight__desc">{s.desc}</span>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FEATURED PROJECTS ── */}
+      <section className="featured">
+        <div className="container">
+          <div className="section-header fade-in">
+            <span className="section-label">Selected Work</span>
+            <h2 className="section-title">Projects I've shipped</h2>
           </div>
 
-          {/* Rest of the projects as matching list cards */}
-          <div className="space-y-8">
-            {projects.map((p, idx) => (
-              <ProjectItem key={idx} {...p} />
-            ))}
+          <div className="proj-grid">
+            {/* TryAI — large image card */}
+            <a
+              href="https://tryaii.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="proj-card proj-card--large proj-card--img fade-in"
+            >
+              <div className="proj-card__img-wrap">
+                <img
+                  src="https://api.microlink.io/?url=https://tryaii.com&screenshot=true&meta=false&embed=screenshot.url"
+                  alt="TryAI screenshot"
+                  className="proj-card__img"
+                  loading="lazy"
+                />
+                <div className="proj-card__img-overlay" />
+              </div>
+              <div className="proj-card__body">
+                <div className="proj-card__meta">
+                  <span className="proj-card__label">Live Product</span>
+                  <div className="proj-card__tags">
+                    {['Node.js', 'React', 'TypeScript', 'AWS'].map(t => (
+                      <span className="proj-card__tag" key={t}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <h3 className="proj-card__title">TryAI</h3>
+                <p className="proj-card__desc">
+                  AI comparison &amp; routing platform. Run any prompt against 6 providers side-by-side
+                  — see quality, latency, and cost instantly. Routing engine recommends from 35+ models.
+                  Live benchmark dataset tracks 335+ LLMs.
+                </p>
+                <span className="proj-card__link">Visit tryaii.com →</span>
+              </div>
+            </a>
+
+            {/* PromLink — image card with architecture diagram */}
+            <a
+              href="https://github.com/keren5005/PromLink"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="proj-card proj-card--img fade-in"
+            >
+              <div className="proj-card__img-wrap proj-card__img-wrap--arch">
+                <img
+                  src="/projects/promlink-arch.png"
+                  alt="PromLink architecture"
+                  className="proj-card__img proj-card__img--contain"
+                  loading="lazy"
+                />
+                <div className="proj-card__img-overlay" />
+              </div>
+              <div className="proj-card__body">
+                <div className="proj-card__meta">
+                  <span className="proj-card__label">Open Source</span>
+                  <div className="proj-card__tags">
+                    {['Go', 'Prometheus', 'Docker'].map(t => (
+                      <span className="proj-card__tag" key={t}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <h3 className="proj-card__title">PromLink</h3>
+                <p className="proj-card__desc">
+                  Extended the official Prometheus Alertmanager with native Mattermost and
+                  Rocket.Chat receivers, each isolated behind a clean interface in the existing
+                  receiver pipeline.
+                </p>
+                <span className="proj-card__link">View on GitHub →</span>
+              </div>
+            </a>
+          </div>
+
+          <div className="featured__cta fade-in">
+            <Link to="/projects" className="btn btn--outline">All Projects →</Link>
           </div>
         </div>
       </section>
 
-      {/* GitHub Features */}
-      <section className="py-10 bg-gray-50 dark:bg-gray-800">
-        <h2 className="text-3xl text-center mb-8 text-teal-600 dark:text-teal-400">GitHub Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 md:px-10">
-          <motion.div
-            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
-            whileHover={{ scale: 1.07, boxShadow: '0px 10px 20px rgba(0, 128, 123, 0.25)' }}
-            transition={{ duration: 0.25 }}
-            onClick={() => openModal('GitHub Stats')}
-          >
-            <h3 className="text-2xl font-bold mb-1 text-teal-600">GitHub Stats</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Commits, stars & more</p>
-          </motion.div>
+      {/* ── CURRENT ROLE ── */}
+      <section className="role-teaser">
+        <div className="container">
+          <div className="section-header fade-in">
+            <span className="section-label">Experience</span>
+            <h2 className="section-title">Current Role</h2>
+          </div>
 
-          <motion.div
-            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
-            whileHover={{ scale: 1.07, boxShadow: '0px 10px 20px rgba(0, 128, 123, 0.25)' }}
-            transition={{ duration: 0.25 }}
-            onClick={() => openModal('Contribution Graph')}
-          >
-            <h3 className="text-2xl font-bold mb-1 text-teal-600">Contribution Graph</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Daily activity heatmap</p>
-          </motion.div>
-
-          <motion.div
-            className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 text-center cursor-pointer"
-            whileHover={{ scale: 1.07, boxShadow: '0px 10px 20px rgba(0, 128, 123, 0.25)' }}
-            transition={{ duration: 0.25 }}
-            onClick={() => openModal('Top Languages')}
-          >
-            <h3 className="text-2xl font-bold mb-1 text-teal-600">Top Languages</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Repo language split</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-xl w-full">
-            <h2 className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-4">{currentFeature}</h2>
-
-            {currentFeature === 'GitHub Stats' && (
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=keren5005&show_icons=true&theme=radical"
-                alt="GitHub Stats"
-                className="w-full"
-              />
-            )}
-            {currentFeature === 'Contribution Graph' && (
-              <img src="https://ghchart.rshah.org/keren5005" alt="Contribution Graph" className="w-full" />
-            )}
-            {currentFeature === 'Top Languages' && (
-              <img
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=keren5005&layout=compact&theme=radical"
-                alt="Top Languages"
-                className="w-full"
-              />
-            )}
-
-            <button onClick={closeModal} className="mt-5 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
-              Close
-            </button>
+          <div className="role-card fade-in">
+            <div className="role-card__header">
+              <div>
+                <h3 className="role-card__title">{exp.role}</h3>
+                <p className="role-card__meta">{exp.company} · {exp.dates}</p>
+              </div>
+              <Link to="/resume" className="btn btn--outline">Full Resume →</Link>
+            </div>
+            <ul className="role-card__bullets">
+              {exp.bullets.slice(0, 4).map((b, i) => <li key={i}>{b}</li>)}
+            </ul>
           </div>
         </div>
-      )}
-
-      {/* GitHub Visualization */}
-      <GitHubVisualization />
+      </section>
     </>
   );
 }
