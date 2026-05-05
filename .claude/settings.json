@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"https://raw.githubusercontent.com/keren5005/PromLink/main/updated_video_thumbnail.png\" -o /Users/keren/portfolio-website/public/promlink-thumbnail.png)",
+      "Bash(curl -s \"https://api.github.com/repos/keren5005/PromLink/contents/?ref=main\")",
+      "Bash(python3 -c \"import sys,json; items=json.load\\(sys.stdin\\); [print\\(i['name']\\) for i in items if isinstance\\(items, list\\) and i['name'].lower\\(\\).endswith\\(\\('.png','.jpg','.gif','.webp'\\)\\)]\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('dependencies',{}\\).get\\('tailwindcss',''\\), d.get\\('devDependencies',{}\\).get\\('tailwindcss',''\\)\\)\")",
+      "Bash(curl -s \"https://api.github.com/repos/keren5005/yoav-rozen-portfolio1/contents/\")",
+      "Bash(curl -s \"https://api.github.com/repos/keren5005/yoav-rozen-portfolio1\")",
+      "Bash(curl -I \"https://github-readme-stats.vercel.app/api?username=keren5005&show_icons=true\")",
+      "Bash(curl -L \"https://github.com/user-attachments/assets/66b8c63b-b250-4b9a-b4d9-2a74374bc62e\" -o /Users/keren/portfolio-website/public/projects/promlink-arch.png)",
+      "Bash(curl -sI \"https://streak-stats.demolab.com/?user=keren5005\")",
+      "Bash(curl -sI \"https://ghchart.rshah.org/keren5005\")",
+      "Bash(curl -sI \"https://api.microlink.io/?url=https://tryaii.com&screenshot=true&meta=false&embed=screenshot.url\")",
+      "Bash(curl -sI \"https://ghchart.rshah.org/6366f1/keren5005\")",
+      "Bash(curl -sI \"https://github.com/keren5005\")",
+      "Bash(curl -sI \"https://github-readme-activity-graph.vercel.app/graph?username=keren5005&theme=react-dark\")",
+      "Bash(curl -s \"https://ghchart.rshah.org/6366f1/keren5005\")",
+      "Bash(curl -s \"https://github-readme-activity-graph.vercel.app/graph?username=keren5005&theme=react-dark\")",
+      "Bash(cp \"/Users/keren/Downloads/Keren_Cohen_CV.pdf\" \"/Users/keren/portfolio-website/public/Keren_Cohen_CV.pdf\" && echo \"copied\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
+    ],
+    "additionalDirectories": [
+      "/Users/keren/Downloads"
+    ]
+  }
+}
